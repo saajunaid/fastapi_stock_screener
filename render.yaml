@@ -1,5 +1,5 @@
 # render.yaml
-# This version uses Python 3.9 for maximum library compatibility.
+# This version uses a modern Python version compatible with the latest libraries.
 
 services:
   # A unique name for our web service
@@ -20,5 +20,6 @@ services:
     envVars:
       # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
-        # CORRECTED: Use a highly compatible LTS Python version.
-        value: "3.9.18"
+        # Use a modern Python version like 3.11, which is compatible with new libraries.
+        value: "3.11.9"
+
