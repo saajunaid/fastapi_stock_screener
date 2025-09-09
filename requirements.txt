@@ -14,6 +14,7 @@ alpaca-trade-api
 scipy
 python-dotenv
 
-# Install pandas-ta directly from the main branch of its official GitHub repository.
-pandas-ta @ git+https://github.com/twopirllc/pandas-ta.git@main
+# Install pandas-ta directly from the main branch of its official GitHub repository
+# using the git:// protocol to avoid authentication issues in the build environment.
+pandas-ta @ git+git://github.com/twopirllc/pandas-ta.git@main
 
