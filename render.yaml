@@ -1,5 +1,5 @@
 # render.yaml
-# This version specifies the full, required Python version (major.minor.patch).
+# This version uses Python 3.10 for maximum library compatibility.
 
 services:
   # A unique name for our web service
@@ -20,6 +20,5 @@ services:
     envVars:
       # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
-        # CORRECTED: Use a full major.minor.patch version.
-        value: "3.11.9"
-
+        # CORRECTED: Use a highly compatible LTS Python version.
+        value: "3.10.13"
