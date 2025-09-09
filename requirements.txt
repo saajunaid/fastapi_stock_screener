@@ -1,6 +1,5 @@
 # requirements.txt
-# FINAL VERSION FOR DEPLOYMENT
-# This version uses modern, flexible dependencies that are available on Render.
+# FINAL VERSION - Installs pandas-ta directly from GitHub to bypass PyPI issues.
 
 fastapi
 uvicorn[standard]
@@ -8,14 +7,13 @@ apscheduler
 jinja2
 python-multipart
 
-# Use a modern, flexible version of pandas.
 pandas>=2.2,<3.0
-
-# Let pip resolve the best compatible versions for the Linux environment.
 numpy
-pandas-ta
 PyYAML
 alpaca-trade-api
 scipy
 python-dotenv
+
+# Install pandas-ta directly from the main branch of its official GitHub repository.
+pandas-ta @ git+https://github.com/twopirllc/pandas-ta.git@main
 

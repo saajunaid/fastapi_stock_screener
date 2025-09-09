@@ -1,6 +1,5 @@
 # render.yaml
-# FINAL STABLE CONFIGURATION
-# This version uses a modern Python version to match the latest libraries.
+# FINAL STABLE CONFIGURATION - Uses Python 3.11 to support direct Git installation.
 
 services:
   # A unique name for our web service
@@ -21,6 +20,6 @@ services:
     envVars:
       # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
-        # Use Python 3.11, which is fully supported by the latest libraries.
+        # Use Python 3.11, which is fully supported and works well with Git-based installs.
         value: "3.11.9"
 
