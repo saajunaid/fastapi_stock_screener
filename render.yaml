@@ -1,11 +1,13 @@
 # render.yaml
-# This is the fully corrected version using the 'runtime' property.
+# This version explicitly specifies the 'free' plan for the service.
 
 services:
   # A unique name for our web service
   - name: stock-screener-app
-    # The runtime specifies the language environment. This is the correct property.
+    # The runtime specifies the language environment.
     runtime: python
+    # Explicitly set the service plan to the free tier.
+    plan: free
     # The type of service. 'web' means it will have a public URL.
     type: web
     # The command to install all our Python packages.
