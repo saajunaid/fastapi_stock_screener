@@ -1,17 +1,20 @@
 # requirements.txt
-# This version uses the latest stable libraries for deployment.
+# This version pins key packages to specific versions for maximum stability.
 
 fastapi
 uvicorn[standard]
 apscheduler
 jinja2
 python-multipart
-# Use a modern, flexible version of pandas
-pandas>=2.2,<3.0
-numpy
+
+# --- Pinned versions for maximum stability on Linux (Python 3.10) ---
+pandas==2.2.2
+numpy==1.26.4
+pandas-ta==0.3.14b0
+# ---
+
 PyYAML
-# Use the latest available pandas-ta, which works correctly on Linux
-pandas-ta
 alpaca-trade-api
 scipy
 python-dotenv
+
