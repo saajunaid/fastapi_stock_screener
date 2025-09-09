@@ -1,0 +1,17 @@
+# requirements.txt
+# This is the stable configuration for Linux deployment (Render)
+# It uses Python 3.11, which is fully compatible with these packages.
+
+fastapi
+uvicorn[standard]
+pandas>=2.2,<3.0
+numpy
+PyYAML
+pandas-ta==0.3.14b0
+alpaca-trade-api
+scipy
+python-dotenv
+apscheduler
+jinja2
+python-multipart
+

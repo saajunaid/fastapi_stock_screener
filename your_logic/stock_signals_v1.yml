@@ -1,0 +1,134 @@
+# your_logic/stock_signals_v1.yml
+signal_spec_version: 2.4 # Version updated for 5m refinement and concurrency
+updated_utc: "2025-09-07T03:15:00Z"
+
+# --- 1. DEFINE ASSET PROFILES with Per-Timeframe Strategies ---
+asset_profiles:
+  low_vol_profile: # For AAPL, MSFT, AMZN
+    "5m": { strategy: "scalping_reversal_pro" }
+    "15m": { strategy: "trend_continuation_refined" }
+    "1h": { strategy: "trend_continuation_refined" }
+    "4h": { strategy: "momentum_trend" }
+    "1d": { strategy: "momentum_trend_refined" }
+    "1w": { strategy: "momentum_trend_refined" }
+
+  mid_vol_profile: # For NVDA, WDC, ENPH, CHPT + 10 new
+    "5m": { strategy: "scalping_reversal_pro" }
+    "15m": { strategy: "trend_continuation_refined" }
+    "1h": { strategy: "trend_continuation_refined" }
+    "4h": { strategy: "momentum_trend_refined" }
+    "1d": { strategy: "momentum_trend_refined" }
+    "1w": { strategy: "momentum_trend_refined" }
+    
+  high_vol_profile: # For MSTR, RIOT, MARA, PLUG + 10 new
+    "5m": { strategy: "scalping_reversal_pro" }
+    "15m": { strategy: "trend_continuation_refined" }
+    "1h": { strategy: "trend_continuation_refined" }
+    "4h": { strategy: "momentum_trend_relaxed" }
+    "1d": { strategy: "momentum_trend_relaxed" }
+    "1w": { strategy: "momentum_trend_relaxed" }
+
+  micro_cap_profile: # For SOFI, PLTR, RIVN, LCID, HUT, BITF + 10 new
+    "5m": { strategy: "scalping_reversal_pro" }
+    "15m": { strategy: "trend_continuation_refined" }
+    "1h": { strategy: "trend_continuation_refined" }
+    "4h": { strategy: "momentum_trend_relaxed" }
+    "1d": { strategy: "momentum_trend_relaxed" }
+    "1w": { strategy: "momentum_trend_relaxed" }
+
+# --- 2. DEFINE GLOBAL DEFAULTS AND STRATEGIES ---
+defaults:
+  timeframes_to_test: ["5m", "15m", "1h", "4h", "1d", "1w"] # 30m removed
+  market_regime_filter:
+    enabled: true
+    sma_period: 200
+    risk_off_strategy: "none"
+
+  strategies:
+    # NEW: A more refined scalping strategy with trend confirmation
+    scalping_reversal_pro:
+      fast_vwma_above_slow: true # Confirmation: only scalp in direction of micro-trend
+      is_uptrend: true
+      proximity_check:
+        enabled: true
+        ma_column: "vwma_fast"
+        proximity_pct: 1.0 # Tighter proximity check
+      stoch_check:
+        enabled: true
+        k_min: 0
+        k_max: 20 # Stricter oversold condition
+      stop_loss_atr_multiple: 1.25
+      take_profit_atr_multiple: 3.125 # Enforces a high 2.5 R:R
+
+    trend_continuation_refined:
+      is_uptrend: true
+      fast_vwma_above_slow: true
+      proximity_check:
+        enabled: true
+        ma_column: "vwma_slow"
+        proximity_pct: 5.0 
+      stoch_check:
+        enabled: true
+        k_min: 25
+        k_max: 80
+      stop_loss_atr_multiple: 2.0
+      take_profit_atr_multiple: 5.0 # High 2.5 R:R
+
+    momentum_trend:
+      is_uptrend: true
+      fast_vwma_above_slow: true
+      stoch_check:
+        enabled: true
+        k_min: 60
+        k_max: 95
+    momentum_trend_refined:
+      is_uptrend: true
+      fast_vwma_above_slow: true
+      stoch_check:
+        enabled: true
+        k_min: 55
+        k_max: 95
+    momentum_trend_relaxed:
+      is_uptrend: true
+      fast_vwma_above_slow: true
+      stoch_check:
+        enabled: true
+        k_min: 50
+        k_max: 98
+
+  indicators:
+    vwma_slow_period_default: 200
+    vwma_fast_period_default: 50
+    vwma_period_by_tf:
+      "5m": { slow: 100, fast: 20 }
+      "15m": { slow: 150, fast: 30 }
+      "1h": { slow: 200, fast: 50 }
+      "4h": { slow: 200, fast: 50 }
+      "1d": { slow: 150, fast: 50 }
+      "1w": { slow: 50, fast: 20 }
+    buy_bb_stddev: 2.5 # Simplified from per-timeframe
+    sell_bb_stddev: 2.5 # Simplified from per-timeframe
+    volume_lookback_period: 20
+  
+  stoch_rsi_params:
+    "5m": { rsi: 14, stoch: 14, k: 3, d: 3 }
+    "15m": { rsi: 14, stoch: 14, k: 3, d: 3 }
+    "1h": { rsi: 14, stoch: 14, k: 5, d: 3 }
+    "4h": { rsi: 14, stoch: 14, k: 5, d: 3 }
+    "1d": { rsi: 14, stoch: 14, k: 8, d: 5 }
+    "1w": { inherit: "1d" }
+
+  risk_management:
+    atr_period: 14
+    trade_cooldown_candles: 2
+    stop_loss: # Legacy for HTF strategies using BB targets
+      atr_multiple_by_tf:
+        "4h": 4.5
+        "1d": 5.0
+        "1w": 6.0
+
+  divergence:
+    enabled: false
+  pattern_sets:
+    bullish: ["Hammer"]
+    bearish: ["Shooting Star"]

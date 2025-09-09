@@ -1,0 +1,23 @@
+# render.yaml
+# This file tells Render how to build and deploy the stock screener app.
+
+services:
+  # A unique name for our web service
+  - name: stock-screener-app
+    # The type of service. 'web' means it will have a public URL.
+    type: web
+    # The environment to use.
+    env: python
+    # Specify the Python version for maximum compatibility with our requirements.
+    pythonVersion: "3.11"
+    # The command to install all our Python packages.
+    buildCommand: "pip install -r requirements.txt"
+    # The command to start the web server.
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    # Health check path to ensure the app is running before going live.
+    healthCheckPath: /
+    # Environment variables section.
+    # IMPORTANT: Add your secret keys in the Render Dashboard, NOT here.
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Screener</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#2c2f33"/>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="apple-touch-icon" href="/static/images/icon-192.png">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <header>
+            <h1>Stock Screener</h1>
+            <div class="controls">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                    <em class="theme-label">Dark Mode</em>
+                </div>
+            </div>
+        </header>
+        <div class="filters">
+            <select id="signalFilter" aria-label="Filter by signal"><option value="">All Signals</option></select>
+            <select id="profileFilter" aria-label="Filter by profile"><option value="">All Profiles</option></select>
+            <select id="frequencySelector" aria-label="Set auto-run frequency">
+                <option value="0">Auto-Run Off</option><option value="5">Every 5 Min</option>
+                <option value="15">Every 15 Min</option><option value="30">Every 30 Min</option>
+                <option value="60">Every 1 Hour</option><option value="120">Every 2 Hours</option>
+            </select>
+        </div>
+        <div class="results-table-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>TF</th><th>Price</th><th>Volume</th><th>VWMA</th>
+                        <th>Stoch%k</th><th>Stoch%d</th><th>Signal</th><th>Candle</th>
+                        <th>SL</th><th>TP</th><th>Profile</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+            </table>
+        </div>
+        <footer>
+            <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="status-bar" id="statusBar">Connecting...</div>
+        </footer>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
+
