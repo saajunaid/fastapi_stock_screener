@@ -1,5 +1,5 @@
 # render.yaml
-# This version explicitly specifies the 'free' plan for the service.
+# This version specifies the full, required Python version (major.minor.patch).
 
 services:
   # A unique name for our web service
@@ -20,4 +20,6 @@ services:
     envVars:
       # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
-        value: "3.11"
+        # CORRECTED: Use a full major.minor.patch version.
+        value: "3.11.9"
+
