@@ -1,15 +1,13 @@
 # render.yaml
-# This file tells Render how to build and deploy the stock screener app.
+# This is the fully corrected version using the 'runtime' property.
 
 services:
   # A unique name for our web service
   - name: stock-screener-app
+    # The runtime specifies the language environment. This is the correct property.
+    runtime: python
     # The type of service. 'web' means it will have a public URL.
     type: web
-    # The environment to use.
-    env: python
-    # Specify the Python version for maximum compatibility with our requirements.
-    pythonVersion: "3.11"
     # The command to install all our Python packages.
     buildCommand: "pip install -r requirements.txt"
     # The command to start the web server.
@@ -17,7 +15,7 @@ services:
     # Health check path to ensure the app is running before going live.
     healthCheckPath: /
     # Environment variables section.
-    # IMPORTANT: Add your secret keys in the Render Dashboard, NOT here.
     envVars:
+      # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
         value: "3.11"
