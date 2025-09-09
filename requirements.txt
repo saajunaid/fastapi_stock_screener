@@ -1,5 +1,6 @@
 # requirements.txt
-# This version pins key packages to specific versions for maximum stability.
+# FINAL VERSION FOR DEPLOYMENT
+# This version uses modern, flexible dependencies that are available on Render.
 
 fastapi
 uvicorn[standard]
@@ -7,12 +8,12 @@ apscheduler
 jinja2
 python-multipart
 
-# --- Pinned versions for maximum stability on Linux (Python 3.10) ---
-pandas==2.2.2
-numpy==1.26.4
-pandas-ta==0.3.14b0
-# ---
+# Use a modern, flexible version of pandas.
+pandas>=2.2,<3.0
 
+# Let pip resolve the best compatible versions for the Linux environment.
+numpy
+pandas-ta
 PyYAML
 alpaca-trade-api
 scipy

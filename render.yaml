@@ -1,6 +1,6 @@
 # render.yaml
 # FINAL STABLE CONFIGURATION
-# This version locks Python to 3.10 and relies on a pinned requirements.txt
+# This version uses a modern Python version to match the latest libraries.
 
 services:
   # A unique name for our web service
@@ -21,5 +21,6 @@ services:
     envVars:
       # This sets the specific Python version for the build environment.
       - key: PYTHON_VERSION
-        # Use a highly compatible LTS Python version.
-        value: "3.10.13"
+        # Use Python 3.11, which is fully supported by the latest libraries.
+        value: "3.11.9"
+
